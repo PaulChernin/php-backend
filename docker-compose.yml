@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+    server:
+        container_name: php-apache
+        build:
+            dockerfile: Dockerfile
+        volumes:
+            - ./www/:/var/www/html
+        ports:
+            - 8000:80
+        links:
+            - db
+    db:
+        container_name: mysql
+        image: mysql
+        environment:
+            MYSQL_DATABASE: 'appDB'
+            MYSQL_USER: 'docker'
+            MYSQL_PASSWORD: 'orange'
+            MYSQL_ROOT_PASSWORD: 'orange'
+        ports:
+            - 8080:8080
